@@ -1,57 +1,53 @@
-# leetcode-solutions
-My collection of coding problems and elegenat solutions
-
-# LeetCode 136 - Single Number
+# LeetCode 136. Single Number
 
 ## Problem
 Given a non-empty array of integers, every element appears twice except for one. Find that single one.
 
 ### Example
-Input: [2,2,1]
-Output: 1
+Input: nums = [4,1,2,1,2]
+Output: 4
 
 ---
 
 ## 💡 Hey, I found an amazing way to solve this problem!
 
-At first, I thought of using a HashMap to count frequencies. But then I realized that XOR has a special property:
+My first thought was to use a hash map to count frequencies, but that would require extra space.
 
-- a ^ a = 0
-- a ^ 0 = a
+Then I remembered the XOR trick:
 
-Since every number appears twice, all pairs cancel each other out, leaving only the single number.
+- x ^ x = 0
+- x ^ 0 = x
 
----
-
-## Approach
-1. Initialize result = 0.
-2. XOR each number with result
-3. Return result
+Since every number except one appears twice, all duplicate numbers cancel each other out, leaving only the single number.
 
 ---
 
-## Python Code
+## Solution
 
+### Python
+```python
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        ans = 0
 
-def singleNumber(nums):
-    result = 0
-    for num in nums:
-        result ^= num
-    return result
+        for num in nums:
+            ans ^= num
 
+        return ans
+```
 
 ---
 
-## Example Walkthrough
+## Dry Run
 
 nums = [4,1,2,1,2]
 
-result = 0
+ans = 0
 
-0 ^ 4 = 4
-4 ^ 1 = 5
-5 ^ 2 = 7
-7 ^ 1 = 6
+0 ^ 4 = 4  
+4 ^ 1 = 5  
+5 ^ 2 = 7  
+7 ^ 1 = 6  
 6 ^ 2 = 4
 
 Answer = 4
@@ -65,9 +61,9 @@ Answer = 4
 
 ---
 
-## Key Insight
+## Key Takeaway
 
-Using XOR allows us to solve the problem in constant space without extra data structures.XOR is perfect for problems where elements appear in pairs because duplicate values cancel each other out automatically
+XOR is perfect for problems where elements appear in pairs because duplicate values cancel each other out automatically.
 <img width="1882" height="723" alt="Screenshot 2026-06-18 110635" src="https://github.com/user-attachments/assets/7ebb300d-5fc4-4938-914d-f978582533f8" />
 
 
